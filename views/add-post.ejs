@@ -1,0 +1,73 @@
+<div class="container">
+    <h1>Add Post</h1>
+    <!-- Post Form -->
+    <form action="/add-post" method="post">
+      <!-- Post Content -->
+      <div class="form-group">
+        <label for="postContent">Post Content</label>
+        <textarea class="form-control" id="postContent" name="content" rows="3" required></textarea>
+      </div>
+      
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+
+  <script>
+
+const randomPosts = [
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "Nulla facilisi. Integer consequat mauris in enim consequat, eu luctus turpis cursus.",
+  "Sed venenatis, ligula sed dapibus ultricies, nunc elit efficitur turpis, at suscipit quam purus a enim.",
+  "Fusce vitae eros volutpat, vestibulum metus id, fermentum leo.",
+  "Nunc malesuada, eros id condimentum vehicula, risus lacus malesuada ligula, auctor posuere ex velit sed urna.",
+  "Cras vel lectus ut magna consectetur vulputate ac nec lorem.",
+  "Vivamus sit amet nisl sed nunc elementum congue.",
+  "Phasellus sed nisi ut arcu dictum suscipit.",
+  "Ut vehicula ipsum at sem commodo, vel laoreet lacus tristique.",
+  "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+  "Nam nec risus at nisi consectetur finibus.",
+  "Suspendisse at sapien vitae nisi sollicitudin vehicula.",
+  "Donec bibendum enim id magna gravida, vel fermentum leo ultricies.",
+  "Fusce sed tortor efficitur, dapibus tortor sed, rutrum metus.",
+  "Quisque auctor enim eget semper blandit.",
+  "Aliquam fermentum nulla eget urna cursus dapibus.",
+  "Nunc rhoncus quam at justo ultrices tristique.",
+  "Praesent sagittis lorem ac elit finibus, a hendrerit libero suscipit.",
+  "Nam id neque nec justo interdum maximus.",
+  "Phasellus dapibus velit sit amet mauris vestibulum, non gravida nisi condimentum.",
+  "Vivamus nec felis in nisi ullamcorper fringilla.",
+  "Etiam convallis orci non luctus malesuada.",
+  "Sed id ipsum et nisi finibus gravida nec sed nisl.",
+  "Proin vel libero eget neque placerat varius.",
+  "Nulla facilisi. Aenean accumsan ipsum ac arcu mattis, in tempor quam facilisis.",
+  "Curabitur rhoncus nunc non ipsum interdum lobortis.",
+  "Duis ac mauris nec eros consequat pellentesque.",
+  "Fusce eu leo nec arcu fermentum elementum.",
+  "Nam et neque ut est fermentum vestibulum ut et nulla.",
+  "Integer vitae lacus id odio tincidunt ultrices.",
+  "Vestibulum fermentum libero in purus venenatis, at aliquet odio suscipit.",
+  "Morbi dignissim velit vitae felis aliquam, vel tincidunt nisi convallis.",
+  "Sed id lacus ut libero finibus egestas.",
+  "Aenean sit amet neque ac arcu laoreet viverra.",
+  "Pellentesque consequat dolor nec dolor sollicitudin, in placerat tortor fringilla.",
+  "Aliquam erat volutpat. Integer commodo purus ut sapien malesuada, nec dapibus nisi consectetur.",
+  "Cras nec augue vel risus aliquam malesuada ac vel mi.",
+  "Donec efficitur lacus nec turpis suscipit, et lobortis nulla dignissim.",
+  "Praesent efficitur arcu sit amet efficitur tempor.",
+  "Vivamus tempus justo nec mauris dictum, sed consectetur leo congue.",
+  "In vel elit non felis consequat lacinia et in velit.",
+  "Nam mattis ligula eget turpis accumsan, a commodo eros dapibus.",
+  "Curabitur aliquet lectus vitae purus pharetra rhoncus.",
+  "Sed euismod risus ut sapien varius, vitae tincidunt leo consequat.",
+  "Sed dignissim lectus nec est interdum, in tincidunt eros fermentum.",
+  "Quisque ut felis non eros ultricies tincidunt.",
+  "Fusce sit amet ipsum in arcu facilisis dapibus."
+];
+
+const randomIndex = Math.floor(Math.random() * randomPosts.length);
+
+document.getElementById('postContent').value = randomPosts[randomIndex]
+
+  </script>

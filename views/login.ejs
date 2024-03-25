@@ -1,0 +1,62 @@
+
+    <!-- Content here -->
+    
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Login</h3>
+                    </div>
+                    <div class="card-body">
+                        <% uflag = '' , pflag= '' %>
+
+                        <% if (error) { %>
+                         
+                            <% if (error) { %>
+                             <% if (value = error.username) { uflag='error' %>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= value %>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+                             <% } %>
+                             <% if (value = error.password) { pflag='error' %>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= value %>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+                             <% } %>
+                            <% } %>
+                
+                           
+                           
+
+                        <% } %>
+                        <form action="/login" method="post">
+                            <div class="mb-3">
+                                <label  for="username" class="form-label">Username:</label>
+                                <input value="<%= data.username ? data.username : '' %>" type="text" id="username" name="username" class="<%= uflag %> form-control" required>
+                            </div>
+    
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password:</label>
+                                <input type="password" id="password" name="password" class="<%= pflag %> form-control" required>
+                            </div>
+    
+                            <button style="margin-bottom:15px;" type="submit" class="btn btn-primary">Login</button>
+                            <br><span style="margin-top:5px;">dont have an account ? <a href="/signup">Signup</a></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var formControls = document.querySelectorAll('.form-control');
+            formControls.forEach(function (element) {
+                element.addEventListener('input', function () {
+                    element.classList.remove('error');
+                });
+            });
+        });
+    </script>

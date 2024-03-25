@@ -1,0 +1,152 @@
+
+    <div style="margin: 10px;" class="container mt-3">
+      <div class="card">
+        <div class="card-header">
+          <!-- User Info: Avatar, Username, Name -->
+          <div class="media">
+            <img src="/avatar.png" style="width: 40px;" class="mr-3 rounded-circle" alt="User Avatar" style="width: 50px;">
+            <div class="media-body">
+              <p class="mt-0"><a class="small" href="/u/<%= post.user.username %>">@<%= post.user.username %></a>
+                <p class="small small"><%= post.date %> <span class="small" style="font-size: 15 !important;"><%= post.hour %></span></p>
+              </p>
+       
+              <p>
+                <%= post.user.name %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Post Content -->
+          <p class="card-text">
+            <%= post.content %>
+          </p>
+          <!-- Action Buttons: Like, Comment, Send -->
+          <div class="btn-group" role="group">
+            <button onClick="addLike('<%= post._id  %>','<%= post.hasLikedByUer %>' , this)" type="button"
+              class="btn <%= post.hasLikedByUer? ' btn-outline-light bg-dark' : 'btn-outline-secondary' %>">
+             <strong id="likes-count"><%= post.likes.count %></strong>  <i class="far fa-thumbs-up"></i> Like
+            </button>
+            <!-- <button href="/like/<%= post._id %>" type="button" class="btn <%= post.hasLikedByUer? ' btn-outline-light bg-dark' : 'btn-outline-secondary' %>"><%= post.likes.count %> <i class="far fa-thumbs-up"></i> Like</button> -->
+            <button type="button" class="btn btn-outline-secondary "><i class="far fa-comment"></i> Comment</button>
+            <button type="button" class="btn btn-outline-secondary"><i class="far fa-paper-plane"></i> Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+
+
+    <div class="card">
+      <div class="card-body">
+        <!-- Comment form -->
+        <form action="/comment/<%= post._id %>" method="post">
+          <!-- Comment text area -->
+          <div class="form-group">
+            <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Write a comment..." required></textarea>
+          </div>
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+<% comments.forEach(comment => { %>
+  <div class="container mt-5">
+    <!-- Comment card -->
+    <div class="card">
+      <div class="card-body">
+        <!-- User information -->
+        <h5 class="card-title"><%= comment.user.username %></h5>
+        <!-- Comment content -->
+        <p class="card-text"><%= comment.content %></p>
+        <!-- Like button -->
+        <button type="button" onclick="" class="btn btn-sm btn-outline-primary mr-2">Like</button>
+        <!-- Reply button -->
+        <button type="button" class="btn btn-sm btn-outline-secondary">Reply</button>
+      </div>
+    </div>
+  </div>
+<% }) %>
+  
+  
+
+  
+  <script>
+
+const randomComments = [
+    "Wow, this is amazing!",
+    "I can't believe it!",
+    "Great job!",
+    "That's hilarious!",
+    "I'm impressed.",
+    "This is so cool!",
+    "I'm speechless.",
+    "You nailed it!",
+    "I'm loving this!",
+    "Incredible work!",
+    "Bravo!",
+    "You're a genius!",
+    "This made my day!",
+    "Absolutely fantastic!",
+    "I'm blown away!",
+    "Keep up the good work!",
+    "This is gold!",
+    "You're on fire!",
+    "This is top-notch!",
+    "You're killing it!",
+    "I'm in awe.",
+    "I'm mesmerized.",
+    "This is revolutionary!",
+    "I'm hooked!",
+    "You're a legend!",
+    "This is breathtaking!",
+    "I'm ecstatic!",
+    "This is pure genius!",
+    "I'm so inspired.",
+    "You're a wizard!",
+    "This is next level!",
+    "I'm ecstatic!",
+    "You're a rockstar!",
+    "This is legendary!",
+    "I'm so proud of you!",
+    "You're unstoppable!",
+    "This is unbelievable!",
+    "I'm over the moon!",
+    "You're a true artist!",
+    "This is out of this world!",
+    "I'm absolutely floored!"
+];
+const randomIndex = Math.floor(Math.random() * randomComments.length);
+
+document.getElementById('comment').value = randomComments[randomIndex]
+
+
+    const addLike = async (id , isLiked , Like ) => {
+      try {
+      const response = await fetch(`/like/${id}`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+      });
+
+      if (!response.ok) {
+          console.log('Failed to add like to post');
+      }
+
+      const responseData = await response.json();
+      Like.querySelector('strong').innerHTML = responseData.count
+      if(responseData.liked) {Like.classList.add('btn-outline-light' ,  'bg-dark') , Like.classList.remove('btn-outline-secondary')} else {
+        Like.classList.remove('btn-outline-light' ,  'bg-dark') , Like.classList.add('btn-outline-secondary')
+      }
+
+      console.log(responseData); // Log the response from the server (e.g., updated post data)
+  } catch (error) {
+      console.error('Error adding like to post:', error);
+  }
+    }
+
+  </script>

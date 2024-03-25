@@ -1,0 +1,100 @@
+<style>
+  
+</style>
+</head>
+
+
+<div class="container mt-5" >
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Signup</h3>
+            </div>
+            <div class="card-body">
+                <form action="/signup" method="post">
+                    <div class="mb-3">
+                        <% uflag = '' , nflag = '' , pflag= '' %>
+
+                        <% if (error) { %>
+                         
+                            <% if (error.username) { %>
+                                <% error.username.forEach(value => { uflag='error' %>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= value %>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>
+                                <% }) %>
+                            <% } %>
+                            <% if (error.name) { %>
+                                <% error.name.forEach(value => { nflag = 'error' %>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= value %>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>
+                                <% }) %>
+                            <% } %>
+                            <% if (error.password) { %>
+                                <% error.password.forEach(value => { pflag = 'error' %>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= value %>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>
+                                <% }) %>
+                            <% } %>
+
+                        <% } %>
+                        
+
+                        <label for="username" class="form-label custom-required">Username:</label>
+                        <input value="<%= data.username ? data.username : '' %>" type="text" id="username" name="username" class="<%= uflag %> form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class=" form-label custom-required">Name:</label>
+                        <input value="<%= data.name ? data.name : '' %>" type="text" id="name" name="name" class="<%= nflag %>  form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label custom-required">Password:</label>
+                        <input type="password" id="password" name="password" class="<%= pflag %> form-control" required>
+                    </div>
+
+                    <button style="margin-bottom:15px;" type="submit" class="btn btn-primary">signup</button>
+                    <br><span style="margin-top:5px;">have an account ? <a href="/login">Login</a></span>
+               </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        var formControls = document.querySelectorAll('.form-control');
+        formControls.forEach(function (element) {
+            element.addEventListener('input', function () {
+                element.classList.remove('error');
+            });
+        });
+    });
+
+    const names = [
+            'John', 'Jane', 'Michael', 'Emily', 'David', 'Emma', 'Andrew', 'Olivia', 'James', 'Sophia',
+            'William', 'Isabella', 'Joseph', 'Charlotte', 'Daniel', 'Amelia', 'Benjamin', 'Mia', 'Matthew', 'Harper',
+            'Ethan', 'Evelyn', 'Alexander', 'Abigail', 'Henry', 'Avery', 'Jacob', 'Grace', 'Samuel', 'Scarlett',
+            'Liam', 'Chloe', 'Noah', 'Madison', 'Logan', 'Elizabeth', 'Lucas', 'Ella', 'Jackson', 'Aria'
+          ];
+           
+          const randomIndex = Math.floor(Math.random() * names.length);
+          const randomNumber = Math.floor(Math.random() * 333);
+
+          const randomName = names[randomIndex];
+          document.getElementById('username').value = `${randomName}${randomNumber}`
+          document.getElementById('name').value = randomName
+          document.getElementById('password').value = '123456'
+
+
+</script>

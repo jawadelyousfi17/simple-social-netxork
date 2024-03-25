@@ -1,0 +1,62 @@
+<div class="container mt-5">
+
+    <% if (error) { %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <%= error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+    <% } %>
+
+
+    <h2> Add user </h2>
+    <form action="/users/search" method="post">
+      <div class="form-group">
+        <label for="searchInput">Search:</label>
+        <input value="<%= username %>" name="username" type="text" class="form-control" id="searchInput" placeholder="Enter user name">
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Search</button>
+    </form>
+  </div>
+
+
+  <style>
+    .profile-pic {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      position: relative;
+      left: 50%;
+      top : 10px ;
+      margin-left:-20px ;
+    }
+  </style>
+
+<% if (data) { %>
+  <% data.forEach(user => { %>
+    <% content = 'Add friend' ; action = 'add' ; if(user.isAFriend) {action='remove' ; content = 'remove friends'} ; if(user.isReq) {content = 'Cancel request'} ; if(user.isRes) {action='accept' ; content = 'Accept'} %>
+    <div class="container mt-5 pd-5">
+      <div class="card" style="width: 18rem;box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+        <img src="/avatar.png" class="card-img-top profile-pic   " alt="Profile Picture">
+        <div class="card-body">
+          <h5 class="card-title"><%= user.name %></h5>
+          <p class="card-text"><strong>@</strong><%= user.username %></p>
+          <a href="/<%= action %>/<%= user._id %>" class="btn btn-primary"><%= content %></a>
+        </div>
+      </div>
+    </div>
+  <% }) ;  if(data.length === 0 ) { %> 
+    <div class="container mt-5">
+      <div class="row" id="userCards">
+        <!-- User cards will be appended here -->
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <p id="noUsersFound" class="text-muted">No users found!</p>
+        </div>
+      </div>
+    </div>
+    <% } %>
+<% } else { %>
+  
+  <% } %> 
+
+  
